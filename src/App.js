@@ -5,6 +5,7 @@ const endpoint = "https://fetch-me.vercel.app/api/shopping/items";
 
 function App() {
   const [data, setData] = useState(null);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -16,13 +17,23 @@ function App() {
     console.log(data);
   }, []);
 
-  if (data === "") {
+  if (data === null) {
     return <div>loading...</div>;
   }
 
   return (
     <div>
-      <h1>Hello</h1>
+      <label htmlFor="input">Your Shopping Item</label>
+      <br />
+      <input
+        type="text"
+        name="input"
+        placeholder="type your item here ..."
+        value={value}
+        onChange={(event) => {
+          setValue(event.target.value);
+        }}
+      />
     </div>
   );
 }
