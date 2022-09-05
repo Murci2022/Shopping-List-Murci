@@ -34,6 +34,12 @@ function App() {
           setValue(event.target.value);
         }}
       />
+      <h2>Filtered Items</h2>
+      <ul>
+        <li>
+          <button></button>
+        </li>
+      </ul>
     </div>
   );
 }
