@@ -16,6 +16,10 @@ function App() {
     console.log(data);
   }, []);
 
+  if (data === "") {
+    return <div>loading...</div>;
+  }
+
   return (
     <div>
       <h1>Hello</h1>
