@@ -35,19 +35,12 @@ function App() {
           setValue(event.target.value);
         }}
       />
-      {/* -----------------ACTIVE ITEMS------- */}
-      <h2>Active Items</h2>
-      <ul>
-        {activeItems.map((item) => {
-          return <li key={item._id}>{item.name.de}</li>;
-        })}
-      </ul>
 
       {/* -------------FILTERED ITEMS---------- */}
       <h2>Filtered Items</h2>
       <ul>
         {value === "" ? (
-          <h2>Please Enter a search term</h2>
+          <h5>Please Enter a search term</h5>
         ) : (
           data
             .filter((item) => {
@@ -71,6 +64,13 @@ function App() {
               );
             })
         )}
+      </ul>
+      {/* -----------------ACTIVE ITEMS------- */}
+      <h2>Active Items</h2>
+      <ul>
+        {activeItems.map((item) => {
+          return <li key={item._id}>{item.name.de}</li>;
+        })}
       </ul>
       {data?.some((item) => {
         return item.name.de.toLowerCase().includes(value.toLowerCase());
