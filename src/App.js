@@ -6,6 +6,7 @@ const endpoint = "https://fetch-me.vercel.app/api/shopping/items";
 function App() {
   const [data, setData] = useState(null);
   const [value, setValue] = useState("");
+  const [activeItems, setActiveItems] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,12 +35,48 @@ function App() {
           setValue(event.target.value);
         }}
       />
+      {/* -----------------ACTIVE ITEMS------- */}
+      <h2>Active Items</h2>
+      <ul>
+        {activeItems.map((item) => {
+          return <li key={item._id}>{item.name.de}</li>;
+        })}
+      </ul>
+
+      {/* -------------FILTERED ITEMS---------- */}
       <h2>Filtered Items</h2>
       <ul>
-        <li>
-          <button></button>
-        </li>
+        {value === "" ? (
+          <h2>Please Enter a search term</h2>
+        ) : (
+          data
+            .filter((item) => {
+              return item.name.de.toLowerCase().includes(value.toLowerCase());
+            })
+            .map((item) => {
+              return (
+                <li key={item._id}>
+                  <button
+                    style={{ background: "red" }}
+                    type="button"
+                    onClick={() => {
+                      // Here
+                      setActiveItems([...activeItems, item]);
+                      setValue("");
+                    }}
+                  >
+                    {item.name.de}
+                  </button>
+                </li>
+              );
+            })
+        )}
       </ul>
+      {data?.some((item) => {
+        return item.name.de.toLowerCase().includes(value.toLowerCase());
+      })
+        ? null
+        : "No matches"}
     </div>
   );
 }
